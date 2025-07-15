@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CanvasMap from "./components/CanvasMap";
 import HelpCard from "./components/HelpCard";
 import NetworkStatus from "./components/NetworkStatus";
+import MapView from "./components/MapView";
 
 const dummyData = [
   { name: "City Hospital", dist: "0.5 km", contact: "1800-111-222" },
@@ -11,22 +12,48 @@ const dummyData = [
 
 function App() {
   const [location, setLocation] = useState(null);
+  const [locationName, setLocationName] = useState("");
 
-  const getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          const { latitude, longitude } = pos.coords;
-          setLocation({ lat: latitude, lon: longitude });
-        },
-        (err) => {
-          alert("Location error: " + err.message);
-        }
-      );
+
+ 
+
+  const fetchLocationName = async (latitude, longitude) => {
+  try {
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`
+    );
+    const data = await response.json();
+    if (data?.address) {
+      const { city, town, village, state, country } = data.address;
+      const name = `${city || town || village || state}, ${country}`;
+      setLocationName(name);
     } else {
-      alert("Geolocation is not supported by this browser.");
+      setLocationName("Unknown Location");
     }
-  };
+  } catch (error) {
+    console.error("Reverse geocoding failed:", error);
+    setLocationName("Error retrieving location");
+  }
+};
+
+const getLocation = () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const { latitude, longitude } = pos.coords;
+        setLocation({ lat: latitude, lon: longitude });
+        fetchLocationName(latitude, longitude); // 🔁 Add this line
+      },
+      (err) => {
+        alert("Location error: " + err.message);
+      }
+    );
+  } else {
+    alert("Geolocation is not supported by this browser.");
+  }
+};
+
+
 
   return (
      <div className="text-center p-6 font-sans bg-gray-100 min-h-screen">
@@ -39,8 +66,13 @@ function App() {
         📍 Find Nearby Help
       </button>
 
+      {locationName && (
+      <p className="text-lg text-gray-800 mt-2">📍 {locationName}</p>
+    )}
+
       <div className="mt-6">
-        {location && <CanvasMap lat={location.lat} lon={location.lon} />}
+        {location && <MapView lat={location.lat} lon={location.lon} />}
+
       </div>
 
       <div className="mt-10 space-y-4">
