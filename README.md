@@ -1,12 +1,45 @@
-# React + Vite
+# 🚨 Emergency Help Finder (React)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A real-life problem-solving React app that helps users locate nearby emergency services using their live location, visual alerts, and responsive design.
 
-Currently, two official plugins are available:
+## 🌐 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔗 [Click to View the App](https://<your-github-username>.github.io/emergency-help-finder-react)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🧠 Problem Solved
+
+This app helps people in emergency situations find nearby hospitals, police stations, and fire departments. It also gives location-based visual feedback and real-time network status.
+
+---
+
+## 💻 Features
+
+- 📍 Uses **Geolocation API** to fetch your current position.
+- 🖼️ Uses **Canvas API** to draw your location on a simple visual canvas.
+- 👀 Uses **IntersectionObserver API** to animate help cards as they come into view.
+- 📶 Uses **Network Information API** to detect and display online/offline status.
+
+---
+
+## 🛠️ Built With
+
+- React (with Hooks)
+- Tailwind CSS (for clean UI)
+- HTML5 Web APIs
+- Deployed on GitHub Pages
+
+---
+
+## 🚀 Web APIs Used
+
+- [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API)
+- [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API)
+- [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
+
+
+---
+
+
+
